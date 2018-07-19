@@ -1,0 +1,30 @@
+webservice demo  :
+                通过cxf发布webservice的demo实例  在接口中注解@WebService
+                spring-cxf-config.xml中配置服务的发布
+                <import resource="classpath:META-INF/cxf/cxf.xml"/>
+                    <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+
+                    <!--
+                     发布服务
+                     和使用endpoint发布服务类似
+                     WebService地址=tomcat地址+cxf+/testWeb
+                  -->
+                    <jaxws:server address="/testWeb" serviceClass="com.demo.webservice.service.TestWebService">
+                        <jaxws:serviceBean>
+                            <!-- 项目中使用@Component 注解来完成IOC容器的装配 -->
+                            <ref bean="testWebService" />
+                        </jaxws:serviceBean>
+                    </jaxws:server>
+
+
+
+                    //通过apache cxf  命令获取客户端调用代码
+
+                        wsdl2java -d D:\\src -client http://api.xxx.cn/xxxAPI/service/auditResBatchQueryService?wsdl
+
+                        参考网站：https://www.cnblogs.com/hf8051/p/4950868.html
+
+
+                        问题：数据的传递与获取
+                        如何通过webService 获取对象或者集合
+                        如何向webservice中传递参数

@@ -28,3 +28,27 @@ webservice demo  :
                         问题：数据的传递与获取
                         如何通过webService 获取对象或者集合
                         如何向webservice中传递参数
+
+
+
+
+                        发布服务后调用服务
+
+                        spring 配置:
+
+                            <import resource="classpath:META-INF/cxf/cxf.xml" />
+                        	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
+                        	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+                            //工厂bean注入 需要 服务接口地址 接口类
+                        	<bean id="clientFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+                                 <property name="serviceClass" value="com.nst.subsystem.zcpt.service.doc.ITcsWebServiceClient" />
+                                 <property name="address" value="${webservice.zcpt.client.address}" />
+                           	</bean>
+                           	//通过工厂创建服务的客户端
+                           	 <bean id="onTcsClient" class="com.nst.subsystem.zcpt.service.doc.ITcsWebServiceClient"
+                                                   factory-bean="clientFactory" factory-method="create"/>
+
+
+
+                         通过工厂获取service的接口，直接通过接口调用webservice的方法即可远程调用

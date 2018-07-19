@@ -1,5 +1,6 @@
 package com.demo.webservice.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
  * 用途：
  * 描述:
  */
-public class User {
+public class User implements Serializable{
     private Date createTime;
 
     private String name;
